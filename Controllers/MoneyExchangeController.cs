@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace MoneyExchangeAppForBrainence.Controllers
 {
-    public class HomeController : Controller
+    public class MoneyExchangeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<MoneyExchangeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public MoneyExchangeController(ILogger<MoneyExchangeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Convert(double amount, string fromCurrency, string toCurrency)
         {
             return View();
         }

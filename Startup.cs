@@ -50,7 +50,7 @@ namespace MoneyExchangeAppForBrainence
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=MoneyExchange}/{action=Convert}/{id?}");
             });
         }
     }
