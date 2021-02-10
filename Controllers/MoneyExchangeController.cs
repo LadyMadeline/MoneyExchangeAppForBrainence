@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MoneyExchangeAppForBrainence.Models;
+using MoneyExchangeAppForBrainence.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,15 +13,26 @@ namespace MoneyExchangeAppForBrainence.Controllers
     public class MoneyExchangeController : Controller
     {
         private readonly ILogger<MoneyExchangeController> _logger;
+        public IMoneyExchangeService MoneyExchangeService { get; set; }
 
-        public MoneyExchangeController(ILogger<MoneyExchangeController> logger)
+        public MoneyExchangeController(ILogger<MoneyExchangeController> logger, IMoneyExchangeService moneyExchangeService)
         {
             _logger = logger;
+            MoneyExchangeService = moneyExchangeService;
         }
 
         public IActionResult Convert(double amount, string fromCurrency, string toCurrency)
         {
+            if (String.IsNullOrEmpty(fromCurrency))
+            {
+                return View();
+            }
+            
+            double toAmount = MoneyExchangeService.GetConvertedSum(amount, fromCurrency, toCurrency);
+            ViewData["fromAmount"] = amount;
+            ViewData["toAmount"] = Math.Round(toAmount, 2);
             return View();
+
         }
 
         public IActionResult Privacy()

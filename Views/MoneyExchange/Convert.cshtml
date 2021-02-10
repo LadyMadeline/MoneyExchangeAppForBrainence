@@ -10,8 +10,8 @@
     <div class="row">
         <form asp-action="Convert" class="d-flex justify-content-between" enctype="multipart/form-data">
             <div class="col-sm d-flex justify-content-between">
-                <label for="fromAmount" class="control-label">Amount</label>
-                <input type="number" min="0" name="fromAmount" value="@ViewData["fromAmount"]" class="form-control mx-3" required />
+                <label for="amount" class="control-label">Amount</label>
+                <input type="number" min="0" name="amount" value="@ViewData["fromAmount"]" class="form-control mx-3" required />
                 <select name="fromCurrency" class="form-control" required>
                     <option>USD</option>
                     <option>EUR</option>
