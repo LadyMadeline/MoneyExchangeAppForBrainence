@@ -1,4 +1,6 @@
-﻿using MoneyExchangeAppForBrainence.Models;
+﻿using MoneyExchangeAppForBrainence.Data;
+using MoneyExchangeAppForBrainence.Models;
+using MoneyExchangeAppForBrainence.Repositoris;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +13,13 @@ namespace MoneyExchangeAppForBrainence.Services
 {
     public class MoneyExchangeService : IMoneyExchangeService
     {
+        private SQLHistoryStorage history { get; set; }
+
+        public MoneyExchangeService(ExchangeRequestContext context)
+        {
+            this.history = new SQLHistoryStorage(context);
+        }
+
         public string GetRates(string firstCurrency, string secondCurrency)
         {
             string rates = string.Empty;
@@ -43,8 +52,18 @@ namespace MoneyExchangeAppForBrainence.Services
         {
             double rate = GetRate(firstCurrency, secondCurrency);
             double convertedSum = sum * rate;
-            //history.AddHistory(firstCurrency, sum, secondCurrency, convertedSum);
+            history.AddHistory(firstCurrency, sum, secondCurrency, convertedSum);
             return Math.Round(convertedSum, 2);
+        }
+
+        public List<ExchangeRequest> GetHistoryStorage()
+        {
+            return history.GetHistory();
+        }
+
+        public void CleanHistoryStorage()
+        {
+            history.CleanHistory();
         }
     }
 }

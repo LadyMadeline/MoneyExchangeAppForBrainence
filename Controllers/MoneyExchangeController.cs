@@ -35,9 +35,17 @@ namespace MoneyExchangeAppForBrainence.Controllers
 
         }
 
-        public IActionResult Privacy()
+        public IActionResult GetHistory()
         {
-            return View();
+            List<ExchangeRequest> history = MoneyExchangeService.GetHistoryStorage();
+            return View("History", history);
+        }
+
+        public IActionResult CleanHistory()
+        {
+            MoneyExchangeService.CleanHistoryStorage();
+            List<ExchangeRequest> history = MoneyExchangeService.GetHistoryStorage();
+            return View("History", history);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MoneyExchangeAppForBrainence.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MoneyExchangeAppForBrainence
 {
@@ -26,7 +28,9 @@ namespace MoneyExchangeAppForBrainence
         {
             services.AddControllersWithViews();
             services.AddTransient<IMoneyExchangeService, MoneyExchangeService>();
-
+            
+            services.AddDbContext<ExchangeRequestContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ExchangeRequestContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
