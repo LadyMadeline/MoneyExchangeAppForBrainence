@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MoneyExchangeAppForBrainence.Models.ExchangeRequest>
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h1>History</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FromCurrency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToCorrency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromCurrency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToCorrency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a asp-action="CleanHistory">Clean history</a>
+</p>
